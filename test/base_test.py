@@ -173,7 +173,7 @@ class TestMappillary(BaseTest):
         qr.send_keys(Keys.RETURN)
         time.sleep(5)
 
-    @pytest.allure.step("Validate about the Search result and return a empty search")
+    @pytest.allure.step("Validate about the User Form for form elements")
     def test_user_input(self):
         basepage = BasePage()
         '''
