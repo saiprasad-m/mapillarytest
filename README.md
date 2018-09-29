@@ -1,6 +1,18 @@
 ## Project for Mapillary Automation Technical Challenge
 
-### Requirements
+### Table of Contents
+**[Requirements](#requirements)**<br>
+**[IMPORTANT](#important)**<br>
+**[Development Environment](#development-environment)**<br>
+**[Approach followed](#approach-followed)**<br>
+**[To spawn the API UI](#to-spawn-the-api-ui)**<br>
+**[To run the Tests](#to-run-the-tests)**<br>
+**[To run entirely using docker](#to-run-entirely-using-docker)**<br>
+**[Progress Status](#progress-status)**<br>
+**[Test Plan](#test-plan)**<br>
+**[Next Steps / Pending](#next-steps)**<br>
+
+## Requirements
 1) Create a Python Rest API Service with 2 APIs  
      a) Create User (username, email, birthdate, address)  
      b) Get Users
@@ -9,7 +21,7 @@
 3) Test (1) and (2) in the smartest way possible
 
 
-### IMPORTANT  
+## IMPORTANT  
 
  A) The information should be persisted in a database of your choice (mongodb, psql, elasticsearch)  
  B) The output of the task should be a docker-compose environment where anyone can run the tests with just one command  
@@ -47,7 +59,7 @@ Python libraries used | Version
 
 ## Approach followed
 
-The Project is partitioned into API and UI, Test, Reports, Docker and a README.md (refer [Folder Structure])
+The Project is partitioned into API and UI, Test, Reports, Docker and a README.md (refer ```Folder Structure```)
 
 The APIs are developed using python library: ```flask, elasticsearch``` and UI is basic html with ```jquery``` and templates
 
@@ -59,7 +71,7 @@ The ```Docker-Compose``` will spawn the elasticsearch at port 9200, app.py at po
 The ```Docker-Compose``` can do all these in 1 command and this can be triggered via a Jenkins Job over Windows Server 2016 or CentOS VM.
 
 
-Folder Structure | 
+```Folder Structure``` | 
 |-----------------
 ```commandline
 C:\Users\SaiPrasad\PycharmProjects\mapillarytest>
@@ -94,7 +106,7 @@ C:.
 
 
 
-#### To spawn the API, UI (individually)
+## To spawn the API UI 
 ```commandline
 python.exe api\app.py
 ```
@@ -103,7 +115,7 @@ and the REST API for User: (http://localhost:9100/user) ```[POST, GET, DELETE]``
 
 
 
-#### To run the Tests (individually)
+## To run the Tests 
 ```commandline
 python.exe -m pytest test\base_test.py --junitxml=.\reports\test_report.xml --html .\reports\report.html
 ```
@@ -111,12 +123,12 @@ python.exe -m pytest test\base_test.py --junitxml=.\reports\test_report.xml --ht
 The automated test execution report are placed under ```test\reports``` folder
 ```C:\Users\SaiPrasad\PycharmProjects\mapillarytest\reports\reports.html```
 
-#### To run entirely using docker
+## To run entirely using docker
 Since the current setup is on Windows 8.1, and only supportes Docker Tookbox with VirtualBox, docker image and docker-compose were created with required targets.  
 Execution was not possible, please refer [Where are we at?]
 
 
-## Where are we at? What is pending/blocker
+## Progress Status
 - [x] API and UI
     - [x] API hosted on 9100 for /user
     - [x] API for /user for GET and POST
@@ -133,6 +145,7 @@ Execution was not possible, please refer [Where are we at?]
     - [x] Basic Job which triggers Job and generates Test reports
     - [ ] Job with Docker-Compose integration to run the Tests
 
+## Next Steps 
 ```Docker Toolbox``` used in this Project is supported on ```Windows8.1``` with certain limitations, however ```Docker for Windows``` is supported on Windows10 or Windows Server 2016  
 *Later is preferred, could not explore it due to lack of Hardware, OS license and for want of extra time*  
 Refer: https://stackoverflow.com/questions/42482154/can-i-run-windows-containers-using-docker-toolbox-on-windows-7
