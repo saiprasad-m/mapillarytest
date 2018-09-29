@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+    </script>
+
+</head>
+<body>
+<h3 id="heading">{{title}}</h3>
+<form action="/" method="post" autocomplete="off">
+    <table border="0" align="right">
+        <tr>
+            <td align="right">
+                <label for="q">Search User:</label>
+                <input type="text" name="q" id="q" value="{{q}}">
+                <input type="submit" name="submitbtn" id="search" value="Search">
+            </td>
+        </tr>
+    </table>
+</form>
+<h4>User List</h4>
+<table class="table-bordered table-hover" width="90%">
+    <tr>
+        <th> #</th>
+        <th> Username</th>
+        <th> Email</th>
+        <th> Birthdate</th>
+        <th> Address</th>
+    </tr>
+    {% if response != undefined %}
+    {% for value in response.hits.hits %}
+    {% if value._source.username != None %}
+    <tr>
+        <td> {{ loop.index }}</td>
+        <td> {{ value._source.username }}</td>
+        <td> {{ value._source.email }}</td>
+        <td> {{ value._source.birthdate }}</td>
+        <td> {{ value._source.address }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+
+</table>
+<br/>
+<table border="0">
+    <tr>
+        <td align="left">
+            <label for="username">User Name:</label>
+            <input type="text" name="username" id="username" size="5">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email">
+            <label for="birthdate">Birth Date:</label>
+            <input type="text" name="birthdate" id="birthdate" size="10">
+            <label for="address">Address:</label>
+            <input type="text" name="address" id="address">
+            <input type="submit" name="submitbtn" id="add" value="Add">
+        </td>
+    </tr>
+</table>
+
+<hr/>
+<div align="right">
+    <h6>Built using Python - flask, elasticsearch, jsonify, jQuery </h6>
+</div>
+
+
+<script type="text/javascript">
+  $(function() {
+            $('#add').bind(
+                'click', function() {
+                        user= {
+                                    username: $('#username').val(),
+                                    email: $('#email').val(),
+                                    address: $('#address').val(),
+                                    birthdate: $('#birthdate').val()
+                                }
+
+                        $.ajax({
+                            type: "POST",
+                            url: $SCRIPT_ROOT + '/user',
+                            dataType: "json",
+                            data: user,
+                            success: function (response) {
+                                console.log(response);
+                                window.location.href = $SCRIPT_ROOT;
+                            },
+
+                            error: function (msg) {
+                                console.log("error: ", msg.status);
+                            }
+                        });
+                      //console.log($('#username').val());
+                      return false;
+                }
+            );
+
+
+            $('#heading').bind(
+                'click', function() {
+                        $.ajax({
+                            type: "DELETE",
+                            url: $SCRIPT_ROOT + '/user',
+                            success: function (response) {
+                                console.log(response);
+                                window.location.href = $SCRIPT_ROOT;
+                            },
+
+                            error: function (msg) {
+                                console.log("error: ", msg.status);
+                            }
+                        });
+                      //console.log($('#username').val());
+                      return false;
+                }
+            );
+
+  });
+
+</script>
+
+
+</body>
+</html>
