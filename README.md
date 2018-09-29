@@ -16,6 +16,33 @@
  C) We DO NOT care about the webapp, the uglier the better  
  D) We DO NOT care about the Api code, it just needs to work  
  E) We DO care about the tests
+---
+## Development environment
+<table border=0>
+<tr><td>
+
+Tool/OS/Path | Details/Version
+-------------| --------
+|Operating System | Windows 8.1 SL |
+|Python | 3.7.0 |
+|pip | 18.0 |
+|Elasticsearch | 6.4.1 |
+|Java|1.8.0_60|
+|Docker Toolbox | 18.03.0-ce |
+|Docker-Compose | 1.20.1 |
+|PyCharm IDE | 2018.2.4 CE |
+
+</td><td>
+
+Python libraries used | Version
+-------------| --------
+|Flask | 1.0.2 |
+|Pytest | 3.8.1 |
+|Elasticsearch | 6.3.1 |
+|selenium | 3.13.0 |
+
+</td></tr> </table>
+
 
 ## Approach followed
 
@@ -74,31 +101,20 @@ Execution was not possible, please refer [Where are we at?]
 *Later is preferred, could not explore it due to lack of Hardware, OS license and for want of extra time*  
 Refer: https://stackoverflow.com/questions/42482154/can-i-run-windows-containers-using-docker-toolbox-on-windows-7
 
-### Development environment
-<table border=0>
-<tr><td>
+## Test Plan
+Automation Testplan has been prepared to showcase few of the best practises like: *Fixture*, *Singleton Webdriver object*, *Page Object*, *Data Provider* and *Junit/HTML report* (Allure, ReportalReport can be supported)
 
-Tool/OS/Path | Details/Version
--------------| --------
-|Operating System | Windows 8.1 SL |
-|Python | 3.7.0 |
-|pip | 18.0 |
-|Elasticsearch | 6.4.1 |
-|Java|1.8.0_60|
-|Docker Toolbox | 18.03.0-ce |
-|Docker-Compose | 1.20.1 |
-|PyCharm IDE | 2018.2.4 CE |
+Test Id | Test case | Test Details | Test Expectation | Test Observation | Data | Comments  
+-------------| -------- | -------- | -------- | -------- | -------- | --------
+|1 | Launch Mapillary test webapp and check heading             | Launch the dummy webapp url ```http://localhost:9100``` , page loads and it has a Heading the reads as  | {'Project' : 'Mapillary Automation test challenge'} | | | 
+|2 | Validate about the User List header                        | Verify that the Header for User List is correct and displayed| Header is ```User List``` | | | | |
+|3 | Validate about the User List table headers                 | Verify that the User List Table column headers are correct and displayed| Column headers are ```#, UserName, Email, Birthdate, Address```| | | | 
+|4 | Seeding the UserList with seed data                        | Add few Users using the ```seeddata``` in the form| Each seed record is added without error, Empty records are not added| | ```seeddata = [("a", "a", "1900-01-01", "a street"),("b", "b", "1900-01-01", "b street"),("c", "c", "1900-01-01", "c street"),("d", "d", "1900-01-01", "d street"),("e", "e", "1900-01-01", "e street"),] ``` | |
+|5 | Validate about the Search options, perform a search        | Perform tests with positive search and negative search criteria, Validate and assert the search results for successful search and unsuccessful search| Search and its corresponding result assertion will be done for each set in the datasource | | ```search = [("a", True),("test1", False),("e", True),("test4", False),] ``` | |
+|6 | Validate about the User Form for form elements             | Verify that the User List Form input fields are correct and displayed | The form is listed and ```Username, Email, Birthdate, Address``` and ```Add``` are displayed and enabled| | | | 
+|7 | Seeding the UserList with testdata                         | Add few Users using the ```testdata``` in the form | Each test user record is added without error, Empty records are not added| | ```testdata = [("test1", "test1@test1.com", "1900-01-01", "test1 street"),("test2", "test2@test2.com", "1900-02-02", "test2 street"),("test3", "test3@test2.com", "1900-03-03", "test3 street"),("test4", "test4@test2.com", "1900-04-04", "test4 street"),]``` | | 
 
-</td><td>
 
-Python libraries used | Version
--------------| --------
-|Flask | 1.0.2 |
-|Pytest | 3.8.1 |
-|Elasticsearch | 6.3.1 |
-|selenium | 3.13.0 |
-
-</td></tr> </table>
 
 Folder Structure | 
 |-----------------
