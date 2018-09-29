@@ -125,7 +125,7 @@ The automated test execution report are placed under ```test\reports``` folder
 
 ## To run entirely using docker
 Since the current setup is on Windows 8.1, and only supportes Docker Tookbox with VirtualBox, docker image and docker-compose were created with required targets.  
-Execution was not possible, please refer [Where are we at?]
+Execution was not possible, please refer [Next Steps](#next-steps)
 
 
 ## Progress Status
