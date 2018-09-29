@@ -1,0 +1,24 @@
+version: '3'
+
+  services:
+    db:
+      image: elasticsearch
+    web:
+      build: .
+      command: python.exe api\app.py
+      volumes:
+      - .:/code
+      ports:
+      - "9100:9100"
+      depends_on:
+      - db
+
+    test:
+      build: .
+      command: python.exe -m pytest test\base_test.py
+      volumes:
+      - .:/code
+      ports:
+      - "9100:9100"
+      depends_on:
+      - db
