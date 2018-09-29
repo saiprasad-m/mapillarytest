@@ -9,13 +9,14 @@
 3) Test (1) and (2) in the smartest way possible
 
 
-### IMPORTANT
+### IMPORTANT  
 
  A) The information should be persisted in a database of your choice (mongodb, psql, elasticsearch)  
  B) The output of the task should be a docker-compose environment where anyone can run the tests with just one command  
  C) We DO NOT care about the webapp, the uglier the better  
  D) We DO NOT care about the Api code, it just needs to work  
  E) We DO care about the tests
+ 
 ---
 ## Development environment
 <table border=0>
@@ -56,6 +57,41 @@ Page Object pattern was used to segregate the locators from the test script itse
 The ```Dockerfile``` will contain the aspects for the container: It will install Python with all the library requirements, download code from GitHub, download elasticsearch and expose required ports for elasticsearch, flask API and webapp.  
 The ```Docker-Compose``` will spawn the elasticsearch at port 9200, app.py at port 9100 and wait for stipulated time and trigger the automation in single command.  
 The ```Docker-Compose``` can do all these in 1 command and this can be triggered via a Jenkins Job over Windows Server 2016 or CentOS VM.
+
+
+Folder Structure | 
+|-----------------
+```commandline
+C:\Users\SaiPrasad\PycharmProjects\mapillarytest>
+Folder PATH listing for volume Windows8_OS
+Volume serial number is A869-4B35
+C:.
+├───.idea
+├───api
+│   └───templates
+│   │   └───index.html
+│   └───app.py
+│   └───dropindex.py
+├───reports
+│   └───assets
+│   └───report.html
+│   └───test_report.xml
+├───test
+│   ├───.pytest_cache ...
+│   ├───pageobject
+│   │   └───BasePage.py
+│   ├───testobject
+│   │   └───BaseTest.py
+│   └───base_test.py
+│   └───conftest.py
+├───Dockerfile
+├───README.md
+├───requirements.txt
+└───venv
+    ├───Include
+    ...
+``` 
+
 
 
 #### To spawn the API, UI (individually)
@@ -114,38 +150,4 @@ Test Id | Test case | Test Details | Test Expectation | Test Observation | Data 
 |6 | Validate about the User Form for form elements             | Verify that the User List Form input fields are correct and displayed | The form is listed and ```Username, Email, Birthdate, Address``` and ```Add``` are displayed and enabled| | | | 
 |7 | Seeding the UserList with testdata                         | Add few Users using the ```testdata``` in the form | Each test user record is added without error, Empty records are not added| | ```testdata = [("test1", "test1@test1.com", "1900-01-01", "test1 street"),("test2", "test2@test2.com", "1900-02-02", "test2 street"),("test3", "test3@test2.com", "1900-03-03", "test3 street"),("test4", "test4@test2.com", "1900-04-04", "test4 street"),]``` | | 
 
-
-
-Folder Structure | 
-|-----------------
-```commandline
-C:\Users\SaiPrasad\PycharmProjects\mapillarytest>
-Folder PATH listing for volume Windows8_OS
-Volume serial number is A869-4B35
-C:.
-├───.idea
-├───api
-│   └───templates
-│   │   └───index.html
-│   └───app.py
-│   └───dropindex.py
-├───reports
-│   └───assets
-│   └───report.html
-│   └───test_report.xml
-├───test
-│   ├───.pytest_cache ...
-│   ├───pageobject
-│   │   └───BasePage.py
-│   ├───testobject
-│   │   └───BaseTest.py
-│   └───base_test.py
-│   └───conftest.py
-├───Dockerfile
-├───README.md
-├───requirements.txt
-└───venv
-    ├───Include
-    ...
-``` 
 
